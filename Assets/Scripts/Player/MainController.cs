@@ -20,8 +20,8 @@ public class MainController : MonoBehaviour
     public float gravityLeft = 2f;
     public float gravitydefault = 1.5f;
     public int weightDefault = 8;
-    public int weightLeft = 4;
-    public int weightRight = 12;
+    public int weightLeft = 12;
+    public int weightRight = 4;
     [Header("加速度设置")] public float accelRight = 10f;
     public float accelLeft = 8f;
     public float decel = 12f;

@@ -240,7 +240,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -353,6 +353,9 @@ MonoBehaviour:
   gravityRight: 1
   gravityLeft: 2
   gravitydefault: 1.5
+  weightDefault: 8
+  weightLeft: 8
+  weightRight: 16
   accelRight: 10
   accelLeft: 8
   decel: 12

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class Platform : MonoBehaviour, IDestroyable
 {
     [Header("Object Attr")] [SerializeField]
     private int weightThreshold;
@@ -87,7 +87,7 @@ public class Platform : MonoBehaviour
             UpdatePlatformState();
         }
     }
-    
+
     private IEnumerator DestroySequence()
     {
         isDestroyed = true; // 标记为已摧毁，防止任何其他交互
@@ -103,11 +103,11 @@ public class Platform : MonoBehaviour
 
         // （可选）在这里播放音效
         // AudioManager.Instance.Play("PlatformSmashSound");
-        
+
         // 禁用平台的渲染器和碰撞体，让它看起来立刻消失了
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
-        
+
         // 等待一小段时间，确保粒子效果能被看到
         yield return new WaitForSeconds(0.1f);
 
@@ -199,5 +199,11 @@ public class Platform : MonoBehaviour
         rb.MovePosition(originPoint);
         currentState = PlatformState.AtTop;
         movementCoroutine = null;
+    }
+
+    public void DestroySelf()
+    {
+        if (!isDestroyed)
+            StartCoroutine(DestroySequence());
     }
 }

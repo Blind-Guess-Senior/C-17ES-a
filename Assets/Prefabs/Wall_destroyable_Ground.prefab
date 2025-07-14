@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2887720156744497270}
   - component: {fileID: 2887720156744497271}
   - component: {fileID: 2887720156744497268}
+  - component: {fileID: 1816205603892757726}
+  - component: {fileID: 8090949577024263436}
   m_Layer: 9
   m_Name: Wall_destroyable_Ground
   m_TagString: Wall_destroyable
@@ -144,5 +146,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fb0387b60b7420478b57b4e8ecbb799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1816205603892757726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2887720156744497269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8663b4b6c662ca43b2f5c4fe22b66d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerThreshold: 1
+--- !u!114 &8090949577024263436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2887720156744497269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ef929b176392648b32b6d937f946e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

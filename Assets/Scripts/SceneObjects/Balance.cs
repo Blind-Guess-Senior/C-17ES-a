@@ -8,6 +8,8 @@ public class Balance : MonoBehaviour
     public Transform rightPlate; // 右托盘 Transform
     private Rigidbody2D leftPlateRigidBody;
     private Rigidbody2D rightPlateRigidBody;
+    private PlateTrigger leftPlateTrigger;
+    private PlateTrigger rightPlateTrigger;
 
     private float baseMoveSpeed = 0.5f;     // 基础移动速度
     [Header("Movement Attr")]
@@ -26,10 +28,19 @@ public class Balance : MonoBehaviour
         rightInitialPos = rightPlate.localPosition;
         leftPlateRigidBody = leftPlate.GetComponent<Rigidbody2D>();
         rightPlateRigidBody = rightPlate.GetComponent<Rigidbody2D>();
+        leftPlateTrigger = leftPlate.GetComponentInChildren<PlateTrigger>();
+        rightPlateTrigger = rightPlate.GetComponentInChildren<PlateTrigger>();
     }
 
     void FixedUpdate()
     {
+        // Garbage collect
+        if (leftPlateTrigger.isDestroyed && rightPlateTrigger.isDestroyed)
+        {
+            Destroy(gameObject);
+        }
+        
+        
         float leftMass = GetTotalMass(leftPlate, leftObjects);
         float rightMass = GetTotalMass(rightPlate, rightObjects);
 

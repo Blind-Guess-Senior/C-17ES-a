@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlateTrigger : MonoBehaviour
+public class PlateTrigger : MonoBehaviour, IDestroyable
 {
     [SerializeField] private Balance balance;
     [SerializeField] private float destoryFallSpeed = 2f;
-    private bool isDestroyed = false;
+    public bool isDestroyed = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -78,7 +78,16 @@ public class PlateTrigger : MonoBehaviour
         // （可选）在这里播放音效
         // AudioManager.Instance.Play("PlatformSmashSound");
 
+        // Caution! Must be different from the way use entityroot since it must no be destroyed.
         transform.parent.gameObject.SetActive(false);
         
+    }
+
+    public void DestroySelf()
+    {
+        if(!isDestroyed)
+        {
+            DestroySequence();
+        }
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
-    [Header("引用组件")] public Rigidbody2D rb;
+    [Header("引用组件")] 
+    public Rigidbody2D rb;
     public GameObject body;
     public GameObject heavyBody;
     public Transform footPoint;
@@ -13,7 +14,18 @@ public class MainController : MonoBehaviour
     public Transform wallCheckPoint;
     public LayerMask wallLayer;
 
-    [Header("水平移动设置")] public float rightSpeed = 3f;
+    [Header("Ability")] 
+    [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<string, bool>();
+    // Ability Cheat Sheet
+    /*
+     * LeftMove
+     * RightMove
+     * UpMove
+     * DownMove
+     */
+
+    [Header("水平移动设置")] 
+    public float rightSpeed = 3f;
     public float leftSpeed = 2f;
     public float gravityRight = 1f;
     public float gravityLeft = 2f;
@@ -21,7 +33,8 @@ public class MainController : MonoBehaviour
     public int weightDefault = 8;
     public int weightLeft = 12;
     public int weightRight = 4;
-    [Header("加速度设置")] public float accelRight = 10f;
+    [Header("加速度设置")] 
+    public float accelRight = 10f;
     public float accelLeft = 8f;
     public float decel = 12f;
     public float maxFallSpeedRight = 5f;
@@ -29,12 +42,23 @@ public class MainController : MonoBehaviour
     public float maxFallSpeeddefault = 6.5f;
 
 
-    [Header("跳跃设置")] public float jumpForce = 8f;
+    [Header("跳跃设置")] 
+    public float jumpForce = 8f;
     public float upFallSpeedRatio = 0.3f;
 
-    [Header("下落加速设置")] public float downFallSpeedRatio = 1.5f;
-    [Header("下落技能设置")] public GameObject fallingBoomPrefab; // 拖入的预制体
+    [Header("下落加速设置")] 
+    public float downFallSpeedRatio = 1.5f;
+    [Header("下落技能设置")] 
+    public GameObject fallingBoomPrefab; // 拖入的预制体
     public float boomHoldTimeThreshold = 1.2f; // 达成阈值的蓄力时间
+    [SerializeField] private float minScale = 0.5f;
+    [SerializeField] private float maxScale = 1.5f;
+    [SerializeField] private float minJumpForce = 4f;
+    [SerializeField] private float maxJumpForce = 8f;
+    [SerializeField] private float minExplosionRadius = 2f;
+    [SerializeField] private float maxExplosionRadius = 5f;
+    [SerializeField] private float minExplosionTime = 0.5f;
+    [SerializeField] private float maxExplosionTime = 0.5f;
 
     private float fallKeyHoldTime = 0f;
     private bool hasSpawnedBoom = false;
@@ -182,7 +206,7 @@ public class MainController : MonoBehaviour
         // 速降 & 蓄力生成Boom
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            Debug.Log("蓄力中...");
+            // Debug.Log("蓄力中...");
 
 
             // 更新蓄力时间，并限制最大值
@@ -211,17 +235,10 @@ public class MainController : MonoBehaviour
                 hasSpawnedBoom = true;
 
                 float powerRatio = fallKeyHoldTime / boomHoldTimeThreshold;
-
-                float minScale = 0.5f;
-                float maxScale = 1.5f;
                 float scale = Mathf.Lerp(minScale, maxScale, powerRatio);
-
-                float minExplosionRadius = 2f;
-                float maxExplosionRadius = 5f;
                 float explosionRadius = Mathf.Lerp(minExplosionRadius, maxExplosionRadius, powerRatio);
-
-                float minJumpForce = 4f;
-                float maxJumpForce = 8f;
+                float explosionTime = Mathf.Lerp(minExplosionTime, maxExplosionTime, powerRatio);
+                
                 float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, powerRatio);
                 Debug.Log($"蓄力跳跃，力度: {jumpForce:F2}");
 
@@ -234,7 +251,8 @@ public class MainController : MonoBehaviour
                     FallBoom fallBoom = boom.GetComponent<FallBoom>();
                     if (fallBoom != null)
                     {
-                        fallBoom.InvokeExplodeWithRadius(explosionRadius);
+                        fallBoom.SetBombAttr(explosionRadius, explosionTime);
+                        // fallBoom.InvokeExplodeWithRadius(explosionRadius);
                     }
 
                     Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
@@ -366,11 +384,13 @@ public class MainController : MonoBehaviour
     {
         if (args.Length >= 1 && args[0] is string abilityName)
         {
-            // TODO: Abiliy Getter
-            switch (abilityName)
+            if (abilities.ContainsKey("abilityName"))
             {
-                default:
-                    break;
+                abilities[abilityName] = true;
+            }
+            else
+            {
+                abilities.Add(abilityName, true);
             }
         }
 

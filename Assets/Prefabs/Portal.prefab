@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4888432468759309828}
   - component: {fileID: 3599550968486820050}
   - component: {fileID: 2425167017281463539}
+  - component: {fileID: 6801568755408063987}
   m_Layer: 10
   m_Name: Portal
   m_TagString: Untagged
@@ -123,6 +124,18 @@ MonoBehaviour:
   portalID: 0
   targetPortal: {fileID: 0}
   teleportCooldown: 1
+--- !u!114 &6801568755408063987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717843164786358395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ef929b176392648b32b6d937f946e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7869119662654509202
 GameObject:
   m_ObjectHideFlags: 0

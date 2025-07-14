@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2887720156744497270}
   - component: {fileID: 2887720156744497271}
   - component: {fileID: 2887720156744497268}
-  m_Layer: 8
-  m_Name: Wall_destroyable
+  m_Layer: 9
+  m_Name: Wall_destroyable_Ground
   m_TagString: Wall_destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

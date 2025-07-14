@@ -30,6 +30,7 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.gameObject.name);
         if (!teleportCooldown)
         {
             return;

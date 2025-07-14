@@ -9,6 +9,9 @@ TagManager:
   - PlayerHeavyBody
   - PlayerFallingBoom
   - PlayerCanAcross
+  - Wall
+  - Wall_destroyable
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,9 +21,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Wall
+  - Ground
+  - Portal
   - 
   - 
   - 

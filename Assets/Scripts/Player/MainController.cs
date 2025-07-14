@@ -8,7 +8,6 @@ public class MainController : MonoBehaviour
     [Header("引用组件")] public Rigidbody2D rb;
     public GameObject body;
     public GameObject heavyBody;
-    public GameObject defaultBody;
     public Transform footPoint;
     public LayerMask groundLayer;
     public Transform wallCheckPoint;
@@ -299,9 +298,7 @@ public class MainController : MonoBehaviour
                 vx = Mathf.Min(vx, rightSpeed);
                 targetGravity = gravityRight;
                 rb.mass = 1f;
-                body.SetActive(true);
                 heavyBody.SetActive(false);
-                defaultBody.SetActive(false);
                 weighted.weight = weightRight;
                 break;
 
@@ -310,9 +307,7 @@ public class MainController : MonoBehaviour
                 vx = Mathf.Max(vx, -leftSpeed);
                 targetGravity = gravityLeft;
                 rb.mass = 2f;
-                body.SetActive(false);
                 heavyBody.SetActive(true);
-                defaultBody.SetActive(false);
                 weighted.weight = weightLeft;
                 break;
 
@@ -330,9 +325,7 @@ public class MainController : MonoBehaviour
 
                 targetGravity = gravitydefault;
                 rb.mass = 1.5f;
-                body.SetActive(false);
                 heavyBody.SetActive(false);
-                defaultBody.SetActive(true);
                 weighted.weight = weightLeft;
                 break;
         }

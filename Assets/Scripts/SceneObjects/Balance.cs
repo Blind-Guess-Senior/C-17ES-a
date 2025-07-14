@@ -6,10 +6,13 @@ public class Balance : MonoBehaviour
 {
     public Transform leftPlate;  // 左托盘 Transform
     public Transform rightPlate; // 右托盘 Transform
-
+    private Rigidbody2D leftPlateRigidBody;
+    private Rigidbody2D rightPlateRigidBody;
 
     private float baseMoveSpeed = 0.5f;     // 基础移动速度
-    private float maxMoveDistance = 2f;   // 最大位移距离
+    [Header("Movement Attr")]
+    [SerializeField] private float baseLerpSpeed = 200f;
+    [SerializeField] private float maxMoveDistance = 2f;   // 最大位移距离
 
     private HashSet<Weighted> leftObjects = new HashSet<Weighted>();
     private HashSet<Weighted> rightObjects = new HashSet<Weighted>();
@@ -21,16 +24,17 @@ public class Balance : MonoBehaviour
     {
         leftInitialPos = leftPlate.localPosition;
         rightInitialPos = rightPlate.localPosition;
+        leftPlateRigidBody = leftPlate.GetComponent<Rigidbody2D>();
+        rightPlateRigidBody = rightPlate.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float leftMass = GetTotalMass(leftPlate, leftObjects);
         float rightMass = GetTotalMass(rightPlate, rightObjects);
 
         float difference = rightMass - leftMass;
         // Debug.Log(difference);
-
 
         float moveDirection = difference; // 方向：+1 或 -1
         // Debug.Log(moveDirection);
@@ -43,16 +47,21 @@ public class Balance : MonoBehaviour
         Vector3 newRightPos = rightPlate.localPosition;
 
         // 向下/向上移动
-        newLeftPos.y += moveDirection * currentMoveSpeed * Time.deltaTime;
-        newRightPos.y -= moveDirection * currentMoveSpeed * Time.deltaTime;
+        newLeftPos.y += moveDirection * currentMoveSpeed * Time.fixedDeltaTime;
+        newRightPos.y -= moveDirection * currentMoveSpeed * Time.fixedDeltaTime;
 
         // 限制最大偏移
         newLeftPos.y = Mathf.Clamp(newLeftPos.y, leftInitialPos.y - maxMoveDistance, leftInitialPos.y + maxMoveDistance);
         newRightPos.y = Mathf.Clamp(newRightPos.y, rightInitialPos.y - maxMoveDistance, rightInitialPos.y + maxMoveDistance);
 
+        // World position
+        Vector3 newLeftWorldPos = transform.TransformPoint(newLeftPos);
+        Vector3 newRightWorldPos = transform.TransformPoint(newRightPos);
         // 更新位置
-        leftPlate.localPosition = newLeftPos;
-        rightPlate.localPosition = newRightPos;
+        // leftPlate.localPosition = newLeftPos;
+        // rightPlate.localPosition = newRightPos;
+        leftPlateRigidBody.MovePosition(newLeftWorldPos);
+        rightPlateRigidBody.MovePosition(newRightWorldPos);
     }
 
     // 获取托盘上的总质量

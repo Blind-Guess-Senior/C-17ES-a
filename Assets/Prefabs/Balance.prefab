@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4141112791495384508}
   - component: {fileID: 8134256135665447603}
   - component: {fileID: 5647669288762276934}
-  m_Layer: 0
+  - component: {fileID: 1663672140079510708}
+  m_Layer: 11
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,6 +135,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1663672140079510708
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047715738220928883}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1803052978969653424
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +173,7 @@ GameObject:
   - component: {fileID: 1548554062176936953}
   - component: {fileID: 3738845973374803430}
   - component: {fileID: 8750023917280064539}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4239544189498765218}
   - component: {fileID: 1983796897132427532}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Balance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,6 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPlate: {fileID: 1840624599145328054}
   rightPlate: {fileID: 4141112791495384508}
+  baseLerpSpeed: 300
+  maxMoveDistance: 2
 --- !u!1 &4683473523408509980
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +315,7 @@ GameObject:
   - component: {fileID: 4032652633952512576}
   - component: {fileID: 6727552563451174946}
   - component: {fileID: 1247736114789006178}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +407,8 @@ GameObject:
   - component: {fileID: 1840624599145328054}
   - component: {fileID: 3675120443849260197}
   - component: {fileID: 3643602437249936485}
-  m_Layer: 0
+  - component: {fileID: 8881955846735287476}
+  m_Layer: 11
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,3 +531,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &8881955846735287476
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335879764069035235}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

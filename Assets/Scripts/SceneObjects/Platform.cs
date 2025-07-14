@@ -14,16 +14,24 @@ public class Platform : MonoBehaviour
     [SerializeField] private float descendSpeed = 2f;
     [SerializeField] private float ascendDelay = 1f;
 
-    private Transform originPoint;
-    private Coroutine movementCoroutine; 
+    private Vector3 originPoint;
+    private Coroutine movementCoroutine;
     private List<Weighted> objectsOnPlatform = new List<Weighted>();
-    private enum PlatformState { AtTop, MovingDown, AtBottom, MovingUp }
+
+    private enum PlatformState
+    {
+        AtTop,
+        MovingDown,
+        AtBottom,
+        MovingUp
+    }
+
     private PlatformState currentState = PlatformState.AtTop;
 
     // Start is called before the first frame update
     void Start()
     {
-        originPoint = transform;
+        originPoint = transform.position;
         if (endPoint == null)
         {
             Debug.Log(gameObject.name + ": No end point");
@@ -76,32 +84,53 @@ public class Platform : MonoBehaviour
         }
     }
 
-    private void Descend()
+    private void StartDescending()
     {
-        // 停止任何可能正在进行的上升协程
-        if (movementCoroutine != null) StopCoroutine(ascendCoroutine);
+        if (movementCoroutine != null)
+        {
+            StopCoroutine(movementCoroutine);
+        }
 
-        transform.position = endPoint.position;
-        hasDescended = true;
+        movementCoroutine = StartCoroutine(DescendCoroutine());
     }
 
-    private void StartAscendSequence()
+    private void StartAscending()
     {
-        ascendCoroutine = StartCoroutine(AscendCoroutine());
+        if (movementCoroutine != null)
+        {
+            StopCoroutine(movementCoroutine);
+        }
+
+        movementCoroutine = StartCoroutine(AscendCoroutine());
+    }
+
+    private IEnumerator DescendCoroutine()
+    {
+        currentState = PlatformState.MovingDown;
+        while (Vector3.Distance(transform.position, endPoint.position) > 0.01f)
+        {
+            transform.position =
+                Vector3.MoveTowards(transform.position, endPoint.position, descendSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        transform.position = endPoint.position;
+        currentState = PlatformState.AtBottom;
+        movementCoroutine = null;
     }
 
     private IEnumerator AscendCoroutine()
     {
         yield return new WaitForSeconds(ascendDelay);
-        while (Vector3.Distance(transform.position, originPoint.position) > 0.01f)
+        while (Vector3.Distance(transform.position, originPoint) > 0.01f)
         {
             transform.position =
-                Vector3.MoveTowards(transform.position, originPoint.position, ascendSpeed * Time.deltaTime);
+                Vector3.MoveTowards(transform.position, originPoint, ascendSpeed * Time.deltaTime);
             yield return null;
         }
 
-        transform.position = originPoint.position;
-        hasDescended = false;
-        ascendCoroutine = null;
+        transform.position = originPoint;
+        currentState = PlatformState.AtTop;
+        movementCoroutine = null;
     }
 }

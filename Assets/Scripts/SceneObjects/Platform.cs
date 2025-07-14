@@ -19,7 +19,7 @@ public class Platform : MonoBehaviour
     private Coroutine movementCoroutine;
     private List<Weighted> objectsOnPlatform = new List<Weighted>();
     private Rigidbody2D rb;
-    private bool isDestoryed = false;
+    private bool isDestroyed = false;
 
     private enum PlatformState
     {
@@ -51,7 +51,7 @@ public class Platform : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (isDestoryed) return;
+        if (isDestroyed) return;
         if (other.CompareTag("PlayerHeavyBody"))
         {
             Rigidbody2D playerRb = other.GetComponentInParent<Rigidbody2D>();
@@ -90,7 +90,7 @@ public class Platform : MonoBehaviour
     
     private IEnumerator DestroySequence()
     {
-        isDestoryed = true; // 标记为已摧毁，防止任何其他交互
+        isDestroyed = true; // 标记为已摧毁，防止任何其他交互
 
         // 停止所有移动
         if (movementCoroutine != null) StopCoroutine(movementCoroutine);

@@ -85,4 +85,6 @@ public class Balance : MonoBehaviour
     public void RemoveFromLeft(Weighted rb) => leftObjects.Remove(rb);
     public void AddToRight(Weighted rb) => rightObjects.Add(rb);
     public void RemoveFromRight(Weighted rb) => rightObjects.Remove(rb);
+    public void ClearLeft() => leftObjects.Clear();
+    public void ClearRight() => rightObjects.Clear();
 }

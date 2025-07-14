@@ -35,12 +35,12 @@ public class Portal : MonoBehaviour
             return;
         }
 
-        if (!other.GetComponentInParent<TeleportableInside>())
+        if (!other.GetComponentInParent<Teleportable>())
         {
             return;
         }
 
-        GameObject teleporter = other.GetComponentInParent<TeleportableInside>().GetComponentInParent<EntityRoot>()
+        GameObject teleporter = other.GetComponentInParent<Teleportable>().GetComponentInParent<EntityRoot>()
             .gameObject;
 
         gameManager.EventOccur("Teleport",
@@ -54,7 +54,7 @@ public class Portal : MonoBehaviour
             return;
         }
 
-        if (other.GetComponentInParent<TeleportableOutside>())
+        if (other.GetComponentInParent<Teleportable>())
             teleportCooldown = true;
     }
 

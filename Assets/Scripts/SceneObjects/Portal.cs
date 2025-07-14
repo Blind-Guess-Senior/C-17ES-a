@@ -7,8 +7,7 @@ public class Portal : MonoBehaviour
     private GameManager gameManager;
     private static int portalCounter = 0;
 
-    [Header("Object Attr")]
-    public int portalID;
+    [Header("Object Attr")] public int portalID;
     [SerializeField] private Portal targetPortal;
     [SerializeField] private bool teleportCooldown = true; // True for enabled.
 
@@ -36,17 +35,13 @@ public class Portal : MonoBehaviour
             return;
         }
 
-        if (!other.CompareTag("PlayerHeart"))
+        if (!other.GetComponentInParent<TeleportableInside>())
         {
             return;
         }
 
-        if (!other.GetComponentInParent<Teleportable>())
-        {
-            return;
-        }
-        
-        GameObject teleporter = other.GetComponentInParent<Teleportable>().gameObject;
+        GameObject teleporter = other.GetComponentInParent<TeleportableInside>().GetComponentInParent<EntityRoot>()
+            .gameObject;
 
         gameManager.EventOccur("Teleport",
             teleporter, portalID, transform, targetPortal.portalID, targetPortal.transform);
@@ -54,12 +49,13 @@ public class Portal : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (teleportCooldown || !other.CompareTag("PlayerBody"))
+        if (teleportCooldown)
         {
             return;
         }
 
-        teleportCooldown = true;
+        if (other.GetComponentInParent<TeleportableOutside>())
+            teleportCooldown = true;
     }
 
     public void TeleportAsTargetSuccess()

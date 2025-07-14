@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleportable : MonoBehaviour
+public class TeleportableInside : MonoBehaviour
 {
     // Left empty
 }

@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 8337281116008585768}
   - component: {fileID: 8337281116008585771}
   - component: {fileID: 8337281116008585770}
+  - component: {fileID: 8024108255856681407}
   m_Layer: 0
   m_Name: body
   m_TagString: PlayerBody
@@ -246,6 +247,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &8024108255856681407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337281116008585773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c807037218be74f838292b8c4c5a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8337281116075586108
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +272,7 @@ GameObject:
   - component: {fileID: 8337281116075586109}
   - component: {fileID: 8337281116075586104}
   - component: {fileID: 4448217268014628516}
-  - component: {fileID: 4482100459871459927}
+  - component: {fileID: 5487798957533182717}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -365,6 +378,14 @@ MonoBehaviour:
   downFallSpeedRatio: 1.5
   fallingBoomPrefab: {fileID: 5144784484677628608, guid: 46b2b3b513634b549bbb8f081447dcbf, type: 3}
   boomHoldTimeThreshold: 0.5
+  minScale: 0.5
+  maxScale: 1.5
+  minJumpForce: 4
+  maxJumpForce: 8
+  minExplosionRadius: 2
+  maxExplosionRadius: 5
+  minExplosionTime: 0.5
+  maxExplosionTime: 0.5
   isGrounded: 0
   isWall: 0
   wallComponent: {fileID: 0}
@@ -408,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 10
---- !u!114 &4482100459871459927
+--- !u!114 &5487798957533182717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,7 +438,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8337281116075586108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 953cbd878562d4d43b7cb248c25e7b23, type: 3}
+  m_Script: {fileID: 11500000, guid: 16ef929b176392648b32b6d937f946e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8337281116552451309
@@ -461,6 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8337281116616099005}
   - component: {fileID: 8337281116616099002}
+  - component: {fileID: 9051526151016281999}
   m_Layer: 0
   m_Name: heart
   m_TagString: PlayerHeart
@@ -519,6 +541,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &9051526151016281999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337281116616099004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953cbd878562d4d43b7cb248c25e7b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8337281116978897079
 GameObject:
   m_ObjectHideFlags: 0

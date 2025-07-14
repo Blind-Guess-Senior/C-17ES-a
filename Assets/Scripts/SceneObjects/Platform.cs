@@ -46,7 +46,7 @@ public class Platform : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Weighted weightedObj = other.GetComponent<Weighted>();
+        Weighted weightedObj = other.GetComponentInParent<Weighted>();
         if (weightedObj != null && !objectsOnPlatform.Contains(weightedObj))
         {
             objectsOnPlatform.Add(weightedObj);
@@ -56,7 +56,7 @@ public class Platform : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Weighted weightedObj = other.GetComponent<Weighted>();
+        Weighted weightedObj = other.GetComponentInParent<Weighted>();
         if (weightedObj != null || objectsOnPlatform.Contains(weightedObj))
         {
             objectsOnPlatform.Remove(weightedObj);

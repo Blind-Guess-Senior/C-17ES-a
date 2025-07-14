@@ -19,6 +19,9 @@ public class MainController : MonoBehaviour
     public float gravityRight = 1f;
     public float gravityLeft = 2f;
     public float gravitydefault = 1.5f;
+    public int weightDefault = 8;
+    public int weightLeft = 4;
+    public int weightRight = 12;
     [Header("加速度设置")] public float accelRight = 10f;
     public float accelLeft = 8f;
     public float decel = 12f;
@@ -287,6 +290,7 @@ public class MainController : MonoBehaviour
     private void ApplyMovement()
     {
         float targetGravity = 1f;
+        Weighted weighted = GetComponent<Weighted>();
 
         switch (currentDirection)
         {
@@ -298,6 +302,7 @@ public class MainController : MonoBehaviour
                 body.SetActive(true);
                 heavyBody.SetActive(false);
                 defaultBody.SetActive(false);
+                weighted.weight = weightRight;
                 break;
 
             case MoveDirection.Left:
@@ -308,6 +313,7 @@ public class MainController : MonoBehaviour
                 body.SetActive(false);
                 heavyBody.SetActive(true);
                 defaultBody.SetActive(false);
+                weighted.weight = weightLeft;
                 break;
 
             case MoveDirection.None:
@@ -327,6 +333,7 @@ public class MainController : MonoBehaviour
                 body.SetActive(false);
                 heavyBody.SetActive(false);
                 defaultBody.SetActive(true);
+                weighted.weight = weightLeft;
                 break;
         }
 

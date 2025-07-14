@@ -29,11 +29,11 @@ public class Balance : MonoBehaviour
         float rightMass = GetTotalMass(rightPlate, rightObjects);
 
         float difference = rightMass - leftMass;
-        Debug.Log(difference);
+        // Debug.Log(difference);
 
 
         float moveDirection = difference; // 方向：+1 或 -1
-        Debug.Log(moveDirection);
+        // Debug.Log(moveDirection);
         float speedMultiplier = difference;
 
         float currentMoveSpeed = baseMoveSpeed;

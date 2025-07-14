@@ -13,11 +13,13 @@ public class Platform : MonoBehaviour
     [SerializeField] private float ascendSpeed = 2f;
     [SerializeField] private float descendSpeed = 2f;
     [SerializeField] private float ascendDelay = 1f;
+    [SerializeField] private float destoryFallSpeed = 2f;
 
     private Vector3 originPoint;
     private Coroutine movementCoroutine;
     private List<Weighted> objectsOnPlatform = new List<Weighted>();
     private Rigidbody2D rb;
+    private bool isDestoryed = false;
 
     private enum PlatformState
     {
@@ -49,6 +51,25 @@ public class Platform : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (isDestoryed) return;
+        if (other.CompareTag("PlayerHeavyBody"))
+        {
+            Rigidbody2D playerRb = other.GetComponentInParent<Rigidbody2D>();
+            if (playerRb != null)
+            {
+                Debug.Log(playerRb.velocity.y);
+                // 检查垂直向下的速度是否足够大
+                // velocity.y 是负值，所以我们和 -criticalFallSpeed 比较
+                if (playerRb.velocity.y < -destoryFallSpeed)
+                {
+                    // 满足条件，开始摧毁流程
+                    StartCoroutine(DestroySequence());
+                    // **重要：** 直接返回，不再执行下面的重量计算逻辑
+                    return;
+                }
+            }
+        }
+
         Weighted weightedObj = other.GetComponentInParent<Weighted>();
         if (weightedObj != null && !objectsOnPlatform.Contains(weightedObj))
         {
@@ -65,6 +86,33 @@ public class Platform : MonoBehaviour
             objectsOnPlatform.Remove(weightedObj);
             UpdatePlatformState();
         }
+    }
+    
+    private IEnumerator DestroySequence()
+    {
+        isDestoryed = true; // 标记为已摧毁，防止任何其他交互
+
+        // 停止所有移动
+        if (movementCoroutine != null) StopCoroutine(movementCoroutine);
+
+        // 如果有粒子效果预制件，就在平台当前位置生成它
+        // if (destructionParticlesPrefab != null)
+        // {
+        //     Instantiate(destructionParticlesPrefab, transform.position, Quaternion.identity);
+        // }
+
+        // （可选）在这里播放音效
+        // AudioManager.Instance.Play("PlatformSmashSound");
+        
+        // 禁用平台的渲染器和碰撞体，让它看起来立刻消失了
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        
+        // 等待一小段时间，确保粒子效果能被看到
+        yield return new WaitForSeconds(0.1f);
+
+        // 最后，彻底摧毁平台的游戏对象
+        Destroy(transform.parent.gameObject);
     }
 
     private void UpdatePlatformState()
@@ -137,6 +185,7 @@ public class Platform : MonoBehaviour
             yield break; // 终止此上升协程
         }
 
+        currentState = PlatformState.MovingUp;
         while (Vector3.Distance(transform.position, originPoint) > 0.01f)
         {
             // 计算下一个位置

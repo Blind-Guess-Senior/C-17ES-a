@@ -84,6 +84,8 @@ public class MainController : MonoBehaviour
     
     private bool inputDisabled = false;
 
+    private PlayerAnimationControl animControl;
+
     private enum MoveDirection
     {
         None,
@@ -101,49 +103,53 @@ public class MainController : MonoBehaviour
         gameManager.RegisterHandler("GetAbility", GetAbility);
         gameManager.RegisterHandler("SwitchRoom", StartSwitchRoom);
         gameManager.RegisterHandler("SwitchRoomFinish", EndSwitchRoom);
+
+        animControl = GetComponentInChildren<PlayerAnimationControl>();
     }
 
     void Update()
     {
-        if(inputDisabled) return;
+        if( inputDisabled ) return;
         CheckGrounded();
         CheckWall();
 
         // 左右移动输入，记录状态
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if( Input.GetKeyDown( KeyCode.RightArrow ) )
         {
             currentDirection = MoveDirection.Right;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if( Input.GetKeyDown( KeyCode.LeftArrow ) )
         {
             currentDirection = MoveDirection.Left;
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        else if( Input.GetKeyUp( KeyCode.RightArrow ) || Input.GetKeyUp( KeyCode.LeftArrow ) )
         {
-            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            if( !Input.GetKey( KeyCode.LeftArrow ) && !Input.GetKey( KeyCode.RightArrow ) )
             {
                 currentDirection = MoveDirection.None;
             }
-            else if (Input.GetKey(KeyCode.RightArrow))
+            else if( Input.GetKey( KeyCode.RightArrow ) )
             {
                 currentDirection = MoveDirection.Right;
             }
-            else if (Input.GetKey(KeyCode.LeftArrow))
+            else if( Input.GetKey( KeyCode.LeftArrow ) )
             {
                 currentDirection = MoveDirection.Left;
             }
         }
 
+        SetAnimation();
+
         ApplyMovement();
-        if (wasFallingBeforeGround)
+        if( wasFallingBeforeGround )
         {
-            if (currentDirection == MoveDirection.Right && isGrounded)
+            if( currentDirection == MoveDirection.Right && isGrounded )
             {
-                Debug.Log("弹跳中...");
+                Debug.Log( "弹跳中..." );
                 float bounceVelocity = 0.8f * -preGroundedVelocity.y;
-                if (bounceVelocity > minBouncespeed)
+                if( bounceVelocity > minBouncespeed )
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, bounceVelocity);
+                    rb.velocity = new Vector2( rb.velocity.x,bounceVelocity );
                     // Debug.Log($"弹跳速度: {bounceVelocity:F2}");
                 }
                 else
@@ -152,7 +158,7 @@ public class MainController : MonoBehaviour
                     bounceVelocity = 0f;
                 }
             }
-            else if (!isGrounded)
+            else if( !isGrounded )
             {
                 // 离地时重置弹跳标志
                 hasBounced = false;
@@ -161,36 +167,36 @@ public class MainController : MonoBehaviour
             wasFallingBeforeGround = false;
         }
 
-        if (currentDirection == MoveDirection.Left && isWall)
+        if( currentDirection == MoveDirection.Left && isWall )
         {
-            Debug.Log("玩家碰撞到墙");
+            Debug.Log( "玩家碰撞到墙" );
             // 当玩家碰撞到墙时触发
-            if (currentDirection == MoveDirection.Left)
+            if( currentDirection == MoveDirection.Left )
             {
-                Debug.Log("正在向左碰墙，开始爬墙");
+                Debug.Log( "正在向左碰墙，开始爬墙" );
 
                 // 施加一个向上的力
                 float climbForce = 5f;
-                rb.velocity = new Vector2(rb.velocity.x, climbForce);
+                rb.velocity = new Vector2( rb.velocity.x,climbForce );
             }
         }
 
 
         // 向上跳跃和缓降
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+        if( Input.GetKeyDown( KeyCode.UpArrow ) && isGrounded )
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2( rb.velocity.x,jumpForce );
             isWingMode = false;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow) && rb.velocity.y < 0 && !isGrounded && !isWingMode)
+        if( Input.GetKey( KeyCode.UpArrow ) && rb.velocity.y < 0 && !isGrounded && !isWingMode )
         {
             isWingMode = true;
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * upFallSpeedRatio);
+            rb.velocity = new Vector2( rb.velocity.x,rb.velocity.y * upFallSpeedRatio );
             rb.gravityScale = baseGravityScale * upFallSpeedRatio;
         }
 
-        if ((Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) && isWingMode)
+        if( ( Input.GetKeyUp( KeyCode.UpArrow ) || Input.GetKeyDown( KeyCode.DownArrow ) ) && isWingMode )
         {
             isWingMode = false;
             rb.gravityScale = baseGravityScale;
@@ -198,9 +204,9 @@ public class MainController : MonoBehaviour
 
         float maxFallSpeed = currentDirection == MoveDirection.Right
             ? maxFallSpeedRight
-            : (currentDirection == MoveDirection.Left ? maxFallSpeedLeft : maxFallSpeeddefault);
+            : ( currentDirection == MoveDirection.Left ? maxFallSpeedLeft : maxFallSpeeddefault );
 
-        if (rb.velocity.y < -maxFallSpeed)
+        if( rb.velocity.y < -maxFallSpeed )
         {
             gravityLeft = -downFallSpeedRatio;
             gravityRight = -downFallSpeedRatio;
@@ -215,67 +221,67 @@ public class MainController : MonoBehaviour
         // Debug.Log($"垂直速度: {rb.velocity.y:F2}");
 
         // 速降 & 蓄力生成Boom
-        if (Input.GetKey(KeyCode.DownArrow))
+        if( Input.GetKey( KeyCode.DownArrow ) )
         {
             // Debug.Log("蓄力中...");
 
 
             // 更新蓄力时间，并限制最大值
             fallKeyHoldTime += Time.deltaTime;
-            fallKeyHoldTime = Mathf.Min(fallKeyHoldTime, boomHoldTimeThreshold);
+            fallKeyHoldTime = Mathf.Min( fallKeyHoldTime,boomHoldTimeThreshold );
         }
 
         // 松开下键触发生成
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if( Input.GetKeyUp( KeyCode.DownArrow ) )
         {
-            if (isGrounded)
+            if( isGrounded )
             {
                 // 地面跳跃逻辑
                 float powerRatio = fallKeyHoldTime / boomHoldTimeThreshold;
 
                 float minJumpForce = 4f;
                 float maxJumpForce = 12f;
-                float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, powerRatio);
+                float jumpForce = Mathf.Lerp( minJumpForce,maxJumpForce,powerRatio );
 
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                Debug.Log($"蓄力跳跃，力度: {jumpForce:F2}");
+                rb.velocity = new Vector2( rb.velocity.x,jumpForce );
+                Debug.Log( $"蓄力跳跃，力度: {jumpForce:F2}" );
             }
-            else if (!hasSpawnedBoom)
+            else if( !hasSpawnedBoom )
             {
                 // 空中生成炸弹逻辑（原逻辑）
                 hasSpawnedBoom = true;
 
                 float powerRatio = fallKeyHoldTime / boomHoldTimeThreshold;
-                float scale = Mathf.Lerp(minScale, maxScale, powerRatio);
-                float explosionRadius = Mathf.Lerp(minExplosionRadius, maxExplosionRadius, powerRatio);
-                float explosionTime = Mathf.Lerp(minExplosionTime, maxExplosionTime, powerRatio);
-                
-                float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, powerRatio);
-                Debug.Log($"蓄力跳跃，力度: {jumpForce:F2}");
+                float scale = Mathf.Lerp( minScale,maxScale,powerRatio );
+                float explosionRadius = Mathf.Lerp( minExplosionRadius,maxExplosionRadius,powerRatio );
+                float explosionTime = Mathf.Lerp( minExplosionTime,maxExplosionTime,powerRatio );
 
-                if (fallingBoomPrefab != null)
+                float jumpForce = Mathf.Lerp( minJumpForce,maxJumpForce,powerRatio );
+                Debug.Log( $"蓄力跳跃，力度: {jumpForce:F2}" );
+
+                if( fallingBoomPrefab != null )
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                    GameObject boom = Instantiate(fallingBoomPrefab, footPoint.position, Quaternion.identity);
+                    rb.velocity = new Vector2( rb.velocity.x,jumpForce );
+                    GameObject boom = Instantiate( fallingBoomPrefab,footPoint.position,Quaternion.identity );
                     boom.transform.localScale = Vector3.one * scale;
 
                     FallBoom fallBoom = boom.GetComponent<FallBoom>();
-                    if (fallBoom != null)
+                    if( fallBoom != null )
                     {
-                        fallBoom.SetBombAttr(explosionRadius, explosionTime);
+                        fallBoom.SetBombAttr( explosionRadius,explosionTime );
                         // fallBoom.InvokeExplodeWithRadius(explosionRadius);
                     }
 
                     Rigidbody2D boomRb = boom.GetComponent<Rigidbody2D>();
-                    if (boomRb != null)
+                    if( boomRb != null )
                     {
-                        Vector2 extra = new Vector2(0, rb.velocity.y * 0.2f);
+                        Vector2 extra = new Vector2( 0,rb.velocity.y * 0.2f );
                         boomRb.velocity = rb.velocity + extra;
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("FallingBoomPrefab 尚未指定！");
+                    Debug.LogWarning( "FallingBoomPrefab 尚未指定！" );
                 }
             }
 
@@ -284,7 +290,7 @@ public class MainController : MonoBehaviour
             fallKeyHoldTime = 0f;
         }
 
-        if (isGrounded)
+        if( isGrounded )
         {
             isFastFall = false;
             rb.gravityScale = baseGravityScale;
@@ -293,13 +299,13 @@ public class MainController : MonoBehaviour
         }
 
         // 每帧检测当前体态来设置重力
-        if (!isWingMode && !isFastFall)
+        if( !isWingMode && !isFastFall )
         {
-            if (heavyBody.activeSelf)
+            if( heavyBody.activeSelf )
             {
                 baseGravityScale = gravityLeft;
             }
-            else if (body.activeSelf)
+            else if( body.activeSelf )
             {
                 baseGravityScale = gravityRight;
             }
@@ -309,6 +315,40 @@ public class MainController : MonoBehaviour
             }
 
             rb.gravityScale = baseGravityScale;
+        }
+    }
+
+    private void SetAnimation ()
+    {
+        int yInput = (int) Input.GetAxisRaw( "Vertical" );
+        //Debug.Log(yInput);
+
+        if( currentDirection == MoveDirection.None )
+        {
+            if( yInput == 0 )
+                animControl.SetState( Enum.PlayerState.Idle );
+            else if( yInput == 1 )
+                animControl.SetState( Enum.PlayerState.Up );
+            else
+                animControl.SetState( Enum.PlayerState.Down );
+        }
+        else if( currentDirection == MoveDirection.Left )
+        {
+            if( yInput == 0 )
+                animControl.SetState( Enum.PlayerState.Left );
+            else if( yInput == 1 )
+                animControl.SetState( Enum.PlayerState.UpLeft );
+            else
+                animControl.SetState( Enum.PlayerState.DownLeft );
+        }
+        else if( currentDirection == MoveDirection.Right )
+        {
+            if( yInput == 0 )
+                animControl.SetState( Enum.PlayerState.Right );
+            else if( yInput == 1 )
+                animControl.SetState( Enum.PlayerState.UpRight );
+            else
+                animControl.SetState( Enum.PlayerState.DownRight );
         }
     }
 

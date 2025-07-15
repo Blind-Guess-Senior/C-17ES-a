@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8337281115903772471}
   - component: {fileID: 8337281115903772470}
   - component: {fileID: 8337281115903772468}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: heavyBody
   m_TagString: PlayerHeavyBody
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8337281116008585768}
   - component: {fileID: 8337281116008585771}
   - component: {fileID: 8337281116008585770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: PlayerBody
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 8337281116075586104}
   - component: {fileID: 4448217268014628516}
   - component: {fileID: 5487798957533182717}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8337281116552451306}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: footprint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 8337281116616099005}
   - component: {fileID: 8337281116616099002}
   - component: {fileID: 9051526151016281999}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: heart
   m_TagString: PlayerHeart
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8337281116978897076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wallpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

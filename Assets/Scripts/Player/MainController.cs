@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainController : MonoBehaviour
 {
@@ -59,7 +61,8 @@ public class MainController : MonoBehaviour
     [SerializeField] private float maxExplosionRadius = 5f;
     [SerializeField] private float minExplosionTime = 0.5f;
     [SerializeField] private float maxExplosionTime = 0.5f;
-
+    [SerializeField] private int layerMask = (1 << 3);
+    
     private float fallKeyHoldTime = 0f;
     private bool hasSpawnedBoom = false;
 
@@ -354,17 +357,19 @@ public class MainController : MonoBehaviour
 
     private void CheckGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(footPoint.position, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(footPoint.position, Vector2.down, 0.1f, layerMask);
         bool prevIsGrounded = isGrounded;
-        isGrounded = hit.collider != null;
-
+        isGrounded = hit.collider != null &&
+                     hit.collider.GetComponentInParent<EntityRoot>() != null &&
+                     hit.collider.GetComponentInParent<EntityRoot>().GetComponent<Ground>() != null;
+        
         if (!prevIsGrounded && isGrounded)
         {
             // 刚接触地面时记录落地前的速度
             preGroundedVelocity = rb.velocity;
             wasFallingBeforeGround = rb.velocity.y < 0; // 是否是下落状态中着地
 
-            Debug.Log($"落地前速度: {preGroundedVelocity}");
+            // Debug.Log($"落地前速度: {preGroundedVelocity}");
         }
 
         Color rayColor = isGrounded ? Color.green : Color.red;
@@ -373,8 +378,10 @@ public class MainController : MonoBehaviour
 
     private void CheckWall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(wallCheckPoint.position, Vector2.left, 0.1f, wallLayer);
-        isWall = hit.collider != null;
+        RaycastHit2D hit = Physics2D.Raycast(wallCheckPoint.position, Vector2.left, 0.1f);
+        isWall = hit.collider != null &&
+                     hit.collider.GetComponentInParent<EntityRoot>() != null &&
+                     hit.collider.GetComponentInParent<EntityRoot>().GetComponent<Wall>() != null;
 
         Color rayColor = isWall ? Color.green : Color.red;
         Debug.DrawRay(wallCheckPoint.position, Vector2.left * 0.1f, rayColor);

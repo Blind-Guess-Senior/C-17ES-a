@@ -563,6 +563,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomSwitchZone
       objectReference: {fileID: 0}
+    - target: {fileID: 39403431147848157, guid: 3d12f4ec4e55abe4fa9a590135dbdf5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6260034794886482629, guid: 3d12f4ec4e55abe4fa9a590135dbdf5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.08

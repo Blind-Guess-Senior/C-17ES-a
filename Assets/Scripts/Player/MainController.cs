@@ -25,6 +25,9 @@ public class MainController : MonoBehaviour
      * UpMove
      * DownMove
      */
+    
+    [Header("About Room")]
+    public int currentRoomID;
 
     [Header("水平移动设置")] 
     public float rightSpeed = 3f;
@@ -78,6 +81,8 @@ public class MainController : MonoBehaviour
     private Vector2 preGroundedVelocity = Vector2.zero;
     private bool wasFallingBeforeGround = false;
     public Wall wallComponent;
+    
+    private bool inputDisabled = false;
 
     private enum MoveDirection
     {
@@ -94,10 +99,13 @@ public class MainController : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         gameManager.RegisterHandler("GetAbility", GetAbility);
+        gameManager.RegisterHandler("SwitchRoom", StartSwitchRoom);
+        gameManager.RegisterHandler("SwitchRoomFinish", EndSwitchRoom);
     }
 
     void Update()
     {
+        if(inputDisabled) return;
         CheckGrounded();
         CheckWall();
 
@@ -401,6 +409,25 @@ public class MainController : MonoBehaviour
             }
         }
 
+        return null;
+    }
+
+    public object StartSwitchRoom(params object[] args)
+    {
+        if (args.Length >= 2 && args[1] is int newRoomID)
+        {
+            currentRoomID = newRoomID;
+            inputDisabled = true;
+        }
+        return null;
+    }
+
+    public object EndSwitchRoom(params object[] args)
+    {
+        if (args.Length >= 1)
+        {
+            inputDisabled = false;
+        }
         return null;
     }
 }

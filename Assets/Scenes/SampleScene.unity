@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 1175436814}
   - component: {fileID: 1175436816}
   - component: {fileID: 1175436817}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Plate
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1050,6 +1050,14 @@ PrefabInstance:
     - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
       propertyPath: weightDefault
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
+      propertyPath: wallLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

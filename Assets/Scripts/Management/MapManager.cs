@@ -7,10 +7,11 @@ public class MapManager : MonoBehaviour
     public static MapManager Instance { get; private set; }
 
     private GameManager gameManager;
-    
-    [Header("Map Management")]
-    // MapID to 0.bool isEnabled 1.Vector3 CenterPoint
-    [SerializeField] private Dictionary<int, object[]> maps = new Dictionary<int, object[]>();
+
+    [Header("Map Management")] 
+    [SerializeField] private int roomCount;
+    // MapID to isEnabled 
+    [SerializeField] private Dictionary<int, bool> roomsEnabled = new Dictionary<int, bool>();
     
     // TODO: minimap
 
@@ -27,6 +28,9 @@ public class MapManager : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         gameManager.RegisterHandler("UpdateMap", UpdateMap);
+        
+        for(int i = 0; i < roomCount; i++)
+            roomsEnabled.Add(i, false);
     }
 
     // Update is called once per frame
@@ -38,7 +42,7 @@ public class MapManager : MonoBehaviour
     {
         if (args.Length >= 1 && args[0] is int newMapID)
         {
-            maps[newMapID][0] = true;
+            roomsEnabled[newMapID] = true;
             UpdateVisualMap(newMapID);
         }
         return null;

@@ -126,6 +126,9 @@ public class MainController : MonoBehaviour
         ApplyMovement();
         if (wasFallingBeforeGround)
         {
+            if (!CheckAbility("RightMove")){
+                return;
+            }
             if (currentDirection == MoveDirection.Right && isGrounded)
             {
                 Debug.Log("弹跳中...");
@@ -152,6 +155,9 @@ public class MainController : MonoBehaviour
 
         if (currentDirection == MoveDirection.Left && isWall)
         {
+            if(!CheckAbility("LeftMove")){
+                return;
+            }
             Debug.Log("玩家碰撞到墙");
             // 当玩家碰撞到墙时触发
             if (currentDirection == MoveDirection.Left)
@@ -174,6 +180,9 @@ public class MainController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow) && rb.velocity.y < 0 && !isGrounded && !isWingMode)
         {
+            if(!CheckAbility("UpMove")){
+                return;
+            }   
             isWingMode = true;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * upFallSpeedRatio);
             rb.gravityScale = baseGravityScale * upFallSpeedRatio;
@@ -207,6 +216,9 @@ public class MainController : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         {
             // Debug.Log("蓄力中...");
+            if(!CheckAbility("DownMove")){
+                return;
+            }
 
 
             // 更新蓄力时间，并限制最大值
@@ -395,5 +407,10 @@ public class MainController : MonoBehaviour
         }
 
         return null;
+    }
+
+    bool CheckAbility(string abilityName)
+    {
+        return abilities.ContainsKey(abilityName) && abilities[abilityName];
     }
 }

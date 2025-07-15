@@ -102,4 +102,5 @@ public enum SoundID
 {
     // WriteDown.
     // 音乐音效名字写这里
+    Dadongbeishiwodejiaxiang = 0
 }

@@ -7,6 +7,12 @@ public class MapManager : MonoBehaviour
     public static MapManager Instance { get; private set; }
 
     private GameManager gameManager;
+    
+    [Header("Map Management")]
+    // MapID to 0.bool isEnabled 1.Vector3 CenterPoint
+    [SerializeField] private Dictionary<int, object[]> maps = new Dictionary<int, object[]>();
+    
+    // TODO: minimap
 
     void Awake()
     {
@@ -30,6 +36,16 @@ public class MapManager : MonoBehaviour
 
     public object UpdateMap(params object[] args)
     {
+        if (args.Length >= 1 && args[0] is int newMapID)
+        {
+            maps[newMapID][0] = true;
+            UpdateVisualMap(newMapID);
+        }
         return null;
+    }
+
+    private void UpdateVisualMap(int newMapID)
+    {
+        
     }
 }

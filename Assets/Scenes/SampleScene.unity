@@ -391,6 +391,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 773a0415cad4f7c4192c3f360b2e7033, type: 3}
+--- !u!114 &223272143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8630563351620279781, guid: 60042972fee56cd47a811351191ec6dd, type: 3}
+  m_PrefabInstance: {fileID: 228896295184299316}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61ab7ad2bf1dde4bba705fb7d2ad758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &229507290 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2425167017281463539, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
@@ -468,6 +479,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
+--- !u!1001 &469671796
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1114368478964162716, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_Name
+      value: AbilityGetter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375475180648880825, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: abilityName
+      value: DownMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.101229
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2870274
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720869376778599677, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de56a68df7a263241a0a8689eed36f68, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,6 +1510,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
+      propertyPath: isGrounded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
       propertyPath: weightLeft
       value: 12
       objectReference: {fileID: 0}
@@ -1445,6 +1521,10 @@ PrefabInstance:
       propertyPath: weightRight
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
+      propertyPath: wallComponent
+      value: 
+      objectReference: {fileID: 223272143}
     - target: {fileID: 8337281116075586109, guid: f280bd0c3a2aa8c409e2f7c201d621ef, type: 3}
       propertyPath: weightDefault
       value: 12

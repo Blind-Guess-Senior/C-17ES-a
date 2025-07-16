@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainController : MonoBehaviour
 {
-    [Header("引用组件")] public Rigidbody2D rb;
+    [Header("引用组件")] 
+    public Rigidbody2D rb;
     public GameObject body;
     public GameObject heavyBody;
     public Transform footPoint;
@@ -15,7 +14,8 @@ public class MainController : MonoBehaviour
     public Transform wallCheckPoint;
     public LayerMask wallLayer;
 
-    [Header("Ability")] [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<string, bool>();
+    [Header("Ability")] 
+    [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<string, bool>();
     // Ability Cheat Sheet
     /*
      * LeftMove
@@ -34,7 +34,8 @@ public class MainController : MonoBehaviour
     public int weightDefault = 8;
     public int weightLeft = 12;
     public int weightRight = 4;
-    [Header("加速度设置")] public float accelRight = 10f;
+    [Header("加速度设置")] 
+    public float accelRight = 10f;
     public float accelLeft = 8f;
     public float decel = 12f;
     public float maxFallSpeedRight = 5f;
@@ -42,11 +43,14 @@ public class MainController : MonoBehaviour
     public float maxFallSpeeddefault = 6.5f;
 
 
-    [Header("跳跃设置")] public float jumpForce = 8f;
+    [Header("跳跃设置")] 
+    public float jumpForce = 8f;
     public float upFallSpeedRatio = 0.3f;
 
-    [Header("下落加速设置")] public float downFallSpeedRatio = 1.5f;
-    [Header("下落技能设置")] public GameObject fallingBoomPrefab; // 拖入的预制体
+    [Header("下落加速设置")] 
+    public float downFallSpeedRatio = 1.5f;
+    [Header("下落技能设置")] 
+    public GameObject fallingBoomPrefab; // 拖入的预制体
     public float boomHoldTimeThreshold = 1.2f; // 达成阈值的蓄力时间
     [SerializeField] private float minScale = 0.5f;
     [SerializeField] private float maxScale = 1.5f;
@@ -136,6 +140,9 @@ public class MainController : MonoBehaviour
         ApplyMovement();
         if (wasFallingBeforeGround)
         {
+            if (!CheckAbility("RightMove")){
+                return;
+            }
             if (currentDirection == MoveDirection.Right && isGrounded)
             {
                 Debug.Log("弹跳中...");
@@ -162,6 +169,9 @@ public class MainController : MonoBehaviour
 
         if (currentDirection == MoveDirection.Left && isWall)
         {
+            if(!CheckAbility("LeftMove")){
+                return;
+            }
             Debug.Log("玩家碰撞到墙");
             // 当玩家碰撞到墙时触发
             if (currentDirection == MoveDirection.Left)
@@ -184,6 +194,9 @@ public class MainController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow) && rb.velocity.y < 0 && !isGrounded && !isWingMode)
         {
+            if(!CheckAbility("UpMove")){
+                return;
+            }   
             isWingMode = true;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * upFallSpeedRatio);
             rb.gravityScale = baseGravityScale * upFallSpeedRatio;
@@ -217,6 +230,9 @@ public class MainController : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         {
             // Debug.Log("蓄力中...");
+            if(!CheckAbility("DownMove")){
+                return;
+            }
 
 
             // 更新蓄力时间，并限制最大值
@@ -466,5 +482,10 @@ public class MainController : MonoBehaviour
         }
 
         return null;
+    }
+
+    bool CheckAbility(string abilityName)
+    {
+        return abilities.ContainsKey(abilityName) && abilities[abilityName];
     }
 }

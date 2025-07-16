@@ -64,7 +64,7 @@ public class MainController : MonoBehaviour
     [SerializeField] private float maxExplosionRadius = 5f;
     [SerializeField] private float minExplosionTime = 0.5f;
     [SerializeField] private float maxExplosionTime = 0.5f;
-    [SerializeField] private int layerMask = (1 << 3);
+    [SerializeField] private int layerMask;
     
     private float fallKeyHoldTime = 0f;
     private bool hasSpawnedBoom = false;
@@ -105,6 +105,7 @@ public class MainController : MonoBehaviour
         gameManager.RegisterHandler("SwitchRoomFinish", EndSwitchRoom);
 
         animControl = GetComponentInChildren<PlayerAnimationControl>();
+        layerMask = ~(1 << (int)LayerMask.NameToLayer("Player"));
     }
 
     void Update()
@@ -426,7 +427,7 @@ public class MainController : MonoBehaviour
 
     private void CheckWall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(wallCheckPoint.position, Vector2.left, 0.1f);
+        RaycastHit2D hit = Physics2D.Raycast(wallCheckPoint.position, Vector2.left, 0.1f, layerMask);
         isWall = hit.collider != null &&
                      hit.collider.GetComponentInParent<EntityRoot>() != null &&
                      hit.collider.GetComponentInParent<EntityRoot>().GetComponent<Wall>() != null;

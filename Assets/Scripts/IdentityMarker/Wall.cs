@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    // Left empty
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.GetComponent<Bomb>())
+        {
+            return;
+        }
+
+        IBomb bomb = other.GetComponent<IBomb>();
+        bomb.Explode();
+    }
 }

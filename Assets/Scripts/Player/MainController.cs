@@ -100,6 +100,11 @@ public class MainController : MonoBehaviour
         gameManager.RegisterHandler("SwitchRoom", StartSwitchRoom);
         gameManager.RegisterHandler("SwitchRoomFinish", EndSwitchRoom);
 
+        abilities.Add("LeftMove", true);
+        abilities.Add("RightMove", true);
+        abilities.Add("UpMove", true);
+        abilities.Add("DownMove", true);
+
         animControl = GetComponentInChildren<PlayerAnimationControl>();
         layerMask = ~(1 << (int)LayerMask.NameToLayer("Player"));
     }

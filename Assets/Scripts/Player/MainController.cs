@@ -102,6 +102,11 @@ public class MainController : MonoBehaviour
 
         animControl = GetComponentInChildren<PlayerAnimationControl>();
         layerMask = ~(1 << (int)LayerMask.NameToLayer("Player"));
+        // 能力锁初始化
+        abilities["RightMove"] = true;
+        abilities["LeftMove"] = false;
+        abilities["UpMove"] = true;
+        abilities["DownMove"] = false;
     }
 
     void Update()
@@ -186,7 +191,7 @@ public class MainController : MonoBehaviour
 
 
         // 向上跳跃和缓降
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded && CheckAbility("UpMove"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isWingMode = false;
@@ -243,6 +248,11 @@ public class MainController : MonoBehaviour
         // 松开下键触发生成
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
+            if (!CheckAbility("DownMove"))
+            {
+                return;
+            }
+
             if (isGrounded)
             {
                 // 地面跳跃逻辑
@@ -368,6 +378,13 @@ public class MainController : MonoBehaviour
     {
         float targetGravity = 1f;
         Weighted weighted = GetComponent<Weighted>();
+        // 若当前方向没有权限，强制停下
+        if ((currentDirection == MoveDirection.Right && !CheckAbility("RightMove")) ||
+            (currentDirection == MoveDirection.Left && !CheckAbility("LeftMove")))
+        {
+            currentDirection = MoveDirection.None;
+        }
+
 
         switch (currentDirection)
         {
@@ -450,7 +467,7 @@ public class MainController : MonoBehaviour
     {
         if (args.Length >= 1 && args[0] is string abilityName)
         {
-            if (abilities.ContainsKey("abilityName"))
+            if (abilities.ContainsKey(abilityName))
             {
                 abilities[abilityName] = true;
             }

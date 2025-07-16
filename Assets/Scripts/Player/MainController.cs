@@ -107,11 +107,7 @@ public class MainController : MonoBehaviour
 
         animControl = GetComponentInChildren<PlayerAnimationControl>();
         layerMask = ~(1 << (int)LayerMask.NameToLayer("Player"));
-        // 能力锁初始化
-        abilities["RightMove"] = true;
-        abilities["LeftMove"] = false;
-        abilities["UpMove"] = true;
-        abilities["DownMove"] = false;
+
     }
 
     void Update()
@@ -156,7 +152,7 @@ public class MainController : MonoBehaviour
             if (currentDirection == MoveDirection.Right && isGrounded)
             {
                 Debug.Log("弹跳中...");
-                float bounceVelocity = 0.8f * -preGroundedVelocity.y;
+                float bounceVelocity = 0.9f * -preGroundedVelocity.y;
                 if (bounceVelocity > minBouncespeed)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, bounceVelocity);
@@ -436,7 +432,7 @@ public class MainController : MonoBehaviour
 
     private void CheckGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(footPoint.position, Vector2.down, 0.1f, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(footPoint.position, Vector2.down, 0.4f, layerMask);
         bool prevIsGrounded = isGrounded;
         isGrounded = hit.collider != null &&
                      hit.collider.GetComponentInParent<EntityRoot>() != null &&
@@ -452,7 +448,7 @@ public class MainController : MonoBehaviour
         }
 
         Color rayColor = isGrounded ? Color.green : Color.red;
-        Debug.DrawRay(footPoint.position, Vector2.down * 0.1f, rayColor);
+        Debug.DrawRay(footPoint.position, Vector2.down * 0.4f, rayColor);
     }
 
     private void CheckWall()

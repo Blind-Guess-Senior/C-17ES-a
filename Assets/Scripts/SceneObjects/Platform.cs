@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Platform : MonoBehaviour, IDestroyable
 {
@@ -14,9 +15,12 @@ public class Platform : MonoBehaviour, IDestroyable
     [SerializeField] private float descendSpeed = 2f;
     [SerializeField] private float ascendDelay = 1f;
     [SerializeField] private float destoryFallSpeed = 2f;
+    // 新增：一个非常短的延迟，用于过滤掉物理引擎的抖动
+    [SerializeField] private float ascentCheckDelay = 0.2f;
 
     private Vector3 originPoint;
     private Coroutine movementCoroutine;
+    private Coroutine ascentCheckCoroutine; // **关键**：控制“检查是否要上升”这个行为的协程
     private List<Weighted> objectsOnPlatform = new List<Weighted>();
     private Rigidbody2D rb;
     private bool isDestroyed = false;
@@ -42,11 +46,15 @@ public class Platform : MonoBehaviour, IDestroyable
         }
 
         rb = GetComponent<Rigidbody2D>();
+
+        InvokeRepeating("UpdatePlatformState", 0.5f, 0.2f);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (isDestroyed) return;
+        UpdatePlatformState();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -74,7 +82,6 @@ public class Platform : MonoBehaviour, IDestroyable
         if (weightedObj != null && !objectsOnPlatform.Contains(weightedObj))
         {
             objectsOnPlatform.Add(weightedObj);
-            UpdatePlatformState();
         }
     }
 
@@ -84,7 +91,6 @@ public class Platform : MonoBehaviour, IDestroyable
         if (weightedObj != null && objectsOnPlatform.Contains(weightedObj))
         {
             objectsOnPlatform.Remove(weightedObj);
-            UpdatePlatformState();
         }
     }
 
@@ -118,6 +124,7 @@ public class Platform : MonoBehaviour, IDestroyable
     private void UpdatePlatformState()
     {
         float currentTotalWeight = objectsOnPlatform.Sum(obj => obj.weight);
+        Debug.Log(currentTotalWeight);
 
         if (currentTotalWeight >= weightThreshold)
         {
@@ -130,9 +137,23 @@ public class Platform : MonoBehaviour, IDestroyable
         {
             if (currentState == PlatformState.AtBottom || currentState == PlatformState.MovingDown)
             {
-                StartAscending();
+                ascentCheckCoroutine = StartCoroutine(DelayedAscendCheck());
             }
         }
+    }
+    private IEnumerator DelayedAscendCheck()
+    {
+        yield return new WaitForSeconds(ascentCheckDelay);
+
+        // 在延迟之后，再次检查最终的重量
+        if (objectsOnPlatform.Sum(obj => obj.weight) < weightThreshold)
+        {
+            // 确认了，重量确实不够，现在可以安全地开始上升
+            StartAscending();
+        }
+
+        // 无论结果如何，检查都已经结束了
+        ascentCheckCoroutine = null;
     }
 
     private void StartDescending()
@@ -176,6 +197,7 @@ public class Platform : MonoBehaviour, IDestroyable
 
     private IEnumerator AscendCoroutine()
     {
+        currentState = PlatformState.MovingUp;
         yield return new WaitForSeconds(ascendDelay);
         float currentTotalWeight = objectsOnPlatform.Sum(obj => obj.weight);
         if (currentTotalWeight >= weightThreshold)
@@ -185,7 +207,6 @@ public class Platform : MonoBehaviour, IDestroyable
             yield break; // 终止此上升协程
         }
 
-        currentState = PlatformState.MovingUp;
         while (Vector3.Distance(transform.position, originPoint) > 0.01f)
         {
             // 计算下一个位置

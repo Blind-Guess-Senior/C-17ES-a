@@ -730,7 +730,33 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Machine-Sheet_0: -1355365049972248253
+      Machine-Sheet_1: 4354863353767576244
+      Machine-Sheet_10: -4336844734197677866
+      Machine-Sheet_11: -8053150403464780867
+      Machine-Sheet_12: 1586796727418298419
+      Machine-Sheet_13: -5918231567394981320
+      Machine-Sheet_14: 6319557097881068546
+      Machine-Sheet_15: -2168542777952885015
+      Machine-Sheet_16: -3018463689720662371
+      Machine-Sheet_17: -732874755746851504
+      Machine-Sheet_18: 7105513710902756027
+      Machine-Sheet_19: -1240937992356938517
+      Machine-Sheet_2: 5260582726124534870
+      Machine-Sheet_20: 7132345637010528765
+      Machine-Sheet_21: -5065582732737304527
+      Machine-Sheet_22: 7778247071828792779
+      Machine-Sheet_23: 3644040252296263589
+      Machine-Sheet_24: -5771361341371395992
+      Machine-Sheet_25: 8613978834805542668
+      Machine-Sheet_3: -8473491051225248723
+      Machine-Sheet_4: 1781676423765869859
+      Machine-Sheet_5: -9118498511111904456
+      Machine-Sheet_6: 5821970709094607253
+      Machine-Sheet_7: 2367457864499795000
+      Machine-Sheet_8: 1409819103492779724
+      Machine-Sheet_9: -3547624893186354936
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

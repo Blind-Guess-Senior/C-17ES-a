@@ -874,7 +874,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Water_1-Sheet_0: -7554238242665065562
+      Water_1-Sheet_1: 9104139271711792935
+      Water_1-Sheet_10: 5547918996356497284
+      Water_1-Sheet_11: -1166545151118014254
+      Water_1-Sheet_12: -436195197663394626
+      Water_1-Sheet_13: 137278153898590978
+      Water_1-Sheet_14: -5179219399754288190
+      Water_1-Sheet_15: 8541317356560235312
+      Water_1-Sheet_16: -8312360353660225104
+      Water_1-Sheet_17: -6974619652001824504
+      Water_1-Sheet_18: -2957135163112824328
+      Water_1-Sheet_19: -4137900222786256139
+      Water_1-Sheet_2: 5623544665253218419
+      Water_1-Sheet_20: 1760690094432970402
+      Water_1-Sheet_21: -8910367372216596886
+      Water_1-Sheet_22: -8158918819939690452
+      Water_1-Sheet_23: -5487776432024500131
+      Water_1-Sheet_24: 5550716947767080490
+      Water_1-Sheet_25: -5829032054186238820
+      Water_1-Sheet_26: 4203431663073783161
+      Water_1-Sheet_27: -8160983998536618332
+      Water_1-Sheet_28: 3521304782622657171
+      Water_1-Sheet_29: -7292850890736876811
+      Water_1-Sheet_3: 980320701077798431
+      Water_1-Sheet_30: -6919683800820684405
+      Water_1-Sheet_31: -7410105762966245499
+      Water_1-Sheet_4: -8843986866882676575
+      Water_1-Sheet_5: 5278957881213529224
+      Water_1-Sheet_6: 5600089818263003506
+      Water_1-Sheet_7: -755469963554019423
+      Water_1-Sheet_8: 859576744883940810
+      Water_1-Sheet_9: -4691977113911932899
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

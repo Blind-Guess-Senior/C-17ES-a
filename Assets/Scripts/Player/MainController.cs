@@ -73,7 +73,7 @@ public class MainController : MonoBehaviour
     private bool isFastFall = false;
 
     private bool hasBounced = false;
-    private float minBouncespeed = 2f;
+    [SerializeField] private float minBouncespeed = 2f;
     private Vector2 preGroundedVelocity = Vector2.zero;
     private bool wasFallingBeforeGround = false;
     public Wall wallComponent;
@@ -93,6 +93,10 @@ public class MainController : MonoBehaviour
 
     private GameManager gameManager;
 
+    [SerializeField] private GameObject wingSprite;
+    [SerializeField] private GameObject ex;
+    [SerializeField] private GameObject para;
+
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -100,10 +104,10 @@ public class MainController : MonoBehaviour
         gameManager.RegisterHandler("SwitchRoom", StartSwitchRoom);
         gameManager.RegisterHandler("SwitchRoomFinish", EndSwitchRoom);
 
-        abilities.Add("LeftMove", true);
+        abilities.Add("LeftMove", false);
         abilities.Add("RightMove", true);
-        abilities.Add("UpMove", true);
-        abilities.Add("DownMove", true);
+        abilities.Add("UpMove", false);
+        abilities.Add("DownMove", false);
 
         animControl = GetComponentInChildren<PlayerAnimationControl>();
         layerMask = ~(1 << (int)LayerMask.NameToLayer("Player"));
@@ -265,11 +269,15 @@ public class MainController : MonoBehaviour
 
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 Debug.Log($"蓄力跳跃，力度: {jumpForce:F2}");
+                hasSpawnedBoom = true;
+                ex.SetActive(true);
             }
             else if (!hasSpawnedBoom)
             {
                 // 空中生成炸弹逻辑（原逻辑）
                 hasSpawnedBoom = true;
+
+                ex.SetActive(true);
 
                 float powerRatio = fallKeyHoldTime / boomHoldTimeThreshold;
                 float scale = Mathf.Lerp(minScale, maxScale, powerRatio);
@@ -315,7 +323,7 @@ public class MainController : MonoBehaviour
             isFastFall = false;
             rb.gravityScale = baseGravityScale;
 
-            hasSpawnedBoom = false;
+            
         }
 
         // 每帧检测当前体态来设置重力
@@ -342,6 +350,16 @@ public class MainController : MonoBehaviour
     {
         int yInput = (int)Input.GetAxisRaw("Vertical");
         //Debug.Log(yInput);
+
+        if (isWingMode)
+            para.SetActive(true);
+        else
+            para.SetActive(false);
+
+        if (yInput == 1)
+            wingSprite.SetActive(true);
+        else
+            wingSprite.SetActive(false);
 
         if (currentDirection == MoveDirection.None)
         {
@@ -443,6 +461,7 @@ public class MainController : MonoBehaviour
             // 刚接触地面时记录落地前的速度
             preGroundedVelocity = rb.velocity;
             wasFallingBeforeGround = rb.velocity.y < 0; // 是否是下落状态中着地
+            hasSpawnedBoom = false;
 
             // Debug.Log($"落地前速度: {preGroundedVelocity}");
         }

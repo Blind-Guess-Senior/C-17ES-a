@@ -10,6 +10,7 @@ public class Balance : MonoBehaviour
     private Rigidbody2D rightPlateRigidBody;
     private PlateTrigger leftPlateTrigger;
     private PlateTrigger rightPlateTrigger;
+    private Animator leftAnim, rightAnim;
 
     private float baseMoveSpeed = 0.5f;     // 基础移动速度
     [Header("Movement Attr")]
@@ -30,6 +31,8 @@ public class Balance : MonoBehaviour
         rightPlateRigidBody = rightPlate.GetComponent<Rigidbody2D>();
         leftPlateTrigger = leftPlate.GetComponentInChildren<PlateTrigger>();
         rightPlateTrigger = rightPlate.GetComponentInChildren<PlateTrigger>();
+        leftAnim = leftPlate.GetComponentInChildren<Animator>();
+        rightAnim = rightPlate.GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -46,6 +49,17 @@ public class Balance : MonoBehaviour
 
         float difference = rightMass - leftMass;
         // Debug.Log(difference);
+
+        if (difference == 0)
+        {
+            leftAnim.SetBool("Move", false);
+            rightAnim.SetBool("Move", false);
+        }
+        else
+        {
+            leftAnim.SetBool("Move", true);
+            rightAnim.SetBool("Move", true);
+        }
 
         float moveDirection = difference; // 方向：+1 或 -1
         // Debug.Log(moveDirection);

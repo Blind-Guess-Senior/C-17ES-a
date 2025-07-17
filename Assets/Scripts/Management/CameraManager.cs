@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
     [Header("Main Camera")] 
     [SerializeField] private Camera mainCamera;
 
-    [SerializeField] private List<Vector3> rooms = new List<Vector3>(); // RoomID to camera pos
+    [SerializeField] private List<Transform> rooms = new List<Transform>(); // RoomID to camera pos
     [SerializeField] private int cameraMoveSpeed = 20;
 
     void Awake()
@@ -39,7 +39,7 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator CameraMoveProcess(int newRoomID)
     {
-        Vector3 cameraTargetPosition = rooms[newRoomID];
+        Vector3 cameraTargetPosition = rooms[newRoomID].position;
         while (Vector3.Distance(mainCamera.transform.position, cameraTargetPosition) > 0.01f)
         {
             // 使用 MoveTowards 以固定速度移动

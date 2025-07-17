@@ -35,6 +35,9 @@ public class Platform : MonoBehaviour, IDestroyable
 
     [SerializeField] private PlatformState currentState = PlatformState.AtTop;
 
+    private Animator anim;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +51,9 @@ public class Platform : MonoBehaviour, IDestroyable
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePlatformState", 0.5f, 0.2f);
+
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -124,7 +130,6 @@ public class Platform : MonoBehaviour, IDestroyable
     private void UpdatePlatformState()
     {
         float currentTotalWeight = objectsOnPlatform.Sum(obj => obj.weight);
-        Debug.Log(currentTotalWeight);
 
         if (currentTotalWeight >= weightThreshold)
         {
@@ -179,6 +184,8 @@ public class Platform : MonoBehaviour, IDestroyable
     private IEnumerator DescendCoroutine()
     {
         currentState = PlatformState.MovingDown;
+        anim.SetBool("Move", true);
+
         while (Vector3.Distance(transform.position, endPoint.position) > 0.01f)
         {
             // 计算下一个位置
@@ -192,12 +199,15 @@ public class Platform : MonoBehaviour, IDestroyable
 
         rb.MovePosition(endPoint.position);
         currentState = PlatformState.AtBottom;
+        anim.SetBool("Move", false);
         movementCoroutine = null;
     }
 
     private IEnumerator AscendCoroutine()
     {
         currentState = PlatformState.MovingUp;
+        anim.SetBool("Move", true);
+
         yield return new WaitForSeconds(ascendDelay);
         float currentTotalWeight = objectsOnPlatform.Sum(obj => obj.weight);
         if (currentTotalWeight >= weightThreshold)
@@ -219,6 +229,7 @@ public class Platform : MonoBehaviour, IDestroyable
 
         rb.MovePosition(originPoint);
         currentState = PlatformState.AtTop;
+        anim.SetBool("Move", false);
         movementCoroutine = null;
     }
 

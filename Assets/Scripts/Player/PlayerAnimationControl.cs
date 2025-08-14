@@ -40,5 +40,9 @@ public class PlayerAnimationControl : MonoBehaviour
         anim.SetInteger( "State",(int) state );
     }
 
+    public void SetAbilityCnt(int cnt)
+    {
+        anim.SetInteger( "AbilityCnt",cnt );
+    }
     
 }

@@ -13,6 +13,7 @@ public class MainController : MonoBehaviour
     public LayerMask groundLayer;
     public Transform wallCheckPoint;
     public LayerMask wallLayer;
+    private PlayerAnimationControl animControl;
 
     [Header("Ability")] 
     [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<string, bool>();
@@ -80,7 +81,6 @@ public class MainController : MonoBehaviour
 
     private bool inputDisabled = false;
 
-    private PlayerAnimationControl animControl;
 
     private enum MoveDirection
     {
@@ -93,6 +93,8 @@ public class MainController : MonoBehaviour
 
     private GameManager gameManager;
 
+    [Header( "Animation info" )]
+    [SerializeField] private int abilityCnt = 1;
     [SerializeField] private GameObject wingSprite;
     [SerializeField] private GameObject ex;
     [SerializeField] private GameObject para;
@@ -145,9 +147,10 @@ public class MainController : MonoBehaviour
             }
         }
 
+        ApplyMovement();
+
         SetAnimation();
 
-        ApplyMovement();
         if (wasFallingBeforeGround)
         {
             if (!CheckAbility("RightMove")){
@@ -490,6 +493,8 @@ public class MainController : MonoBehaviour
             if (abilities.ContainsKey(abilityName))
             {
                 abilities[abilityName] = true;
+                abilityCnt++;
+                animControl.SetAbilityCnt( abilityCnt );
             }
             else
             {

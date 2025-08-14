@@ -112,7 +112,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -123,7 +123,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -150,7 +150,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -178,10 +178,10 @@ TextureImporter:
       name: Machine-Sheet_0
       rect:
         serializedVersion: 2
-        x: 3289
-        y: 579
-        width: 42
-        height: 42
+        x: 0
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,10 +199,10 @@ TextureImporter:
       name: Machine-Sheet_1
       rect:
         serializedVersion: 2
-        x: 3949
-        y: 599
-        width: 42
-        height: 32
+        x: 640
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,10 +220,10 @@ TextureImporter:
       name: Machine-Sheet_2
       rect:
         serializedVersion: 2
-        x: 4619
-        y: 609
-        width: 22
-        height: 22
+        x: 1280
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,10 +241,10 @@ TextureImporter:
       name: Machine-Sheet_3
       rect:
         serializedVersion: 2
-        x: 5269
-        y: 619
-        width: 12
-        height: 12
+        x: 1920
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +262,10 @@ TextureImporter:
       name: Machine-Sheet_4
       rect:
         serializedVersion: 2
-        x: 2639
-        y: 549
-        width: 62
-        height: 62
+        x: 2560
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -283,10 +283,10 @@ TextureImporter:
       name: Machine-Sheet_5
       rect:
         serializedVersion: 2
-        x: 3349
-        y: 599
-        width: 12
-        height: 12
+        x: 3200
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,10 +304,10 @@ TextureImporter:
       name: Machine-Sheet_6
       rect:
         serializedVersion: 2
-        x: 3999
-        y: 579
-        width: 22
-        height: 22
+        x: 3840
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -325,10 +325,10 @@ TextureImporter:
       name: Machine-Sheet_7
       rect:
         serializedVersion: 2
-        x: 4659
-        y: 599
-        width: 12
-        height: 12
+        x: 4480
+        y: 0
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: Machine-Sheet_8
       rect:
         serializedVersion: 2
-        x: 19
+        x: 5120
         y: 0
-        width: 542
-        height: 561
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,10 +367,10 @@ TextureImporter:
       name: Machine-Sheet_9
       rect:
         serializedVersion: 2
-        x: 659
+        x: 5760
         y: 0
-        width: 542
-        height: 561
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,10 +388,10 @@ TextureImporter:
       name: Machine-Sheet_10
       rect:
         serializedVersion: 2
-        x: 1299
+        x: 6400
         y: 0
-        width: 582
-        height: 561
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -409,10 +409,10 @@ TextureImporter:
       name: Machine-Sheet_11
       rect:
         serializedVersion: 2
-        x: 1939
+        x: 7040
         y: 0
-        width: 542
-        height: 561
+        width: 640
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -426,304 +426,10 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_12
-      rect:
-        serializedVersion: 2
-        x: 1969
-        y: 519
-        width: 42
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3302584673f650610800000000000000
-      internalID: 1586796727418298419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 2579
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83a3beedeb73edda0800000000000000
-      internalID: -5918231567394981320
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_14
-      rect:
-        serializedVersion: 2
-        x: 3219
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 204eff4b2b393b750800000000000000
-      internalID: 6319557097881068546
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_15
-      rect:
-        serializedVersion: 2
-        x: 3339
-        y: 559
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9e621e735d9c7e1e0800000000000000
-      internalID: -2168542777952885015
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_16
-      rect:
-        serializedVersion: 2
-        x: 3859
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d96f8c644434c16d0800000000000000
-      internalID: -3018463689720662371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_17
-      rect:
-        serializedVersion: 2
-        x: 4499
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0559bd6ea4e44d5f0800000000000000
-      internalID: -732874755746851504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_18
-      rect:
-        serializedVersion: 2
-        x: 5139
-        y: 0
-        width: 582
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb2c60dc21bdb9260800000000000000
-      internalID: 7105513710902756027
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_19
-      rect:
-        serializedVersion: 2
-        x: 5779
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bec3741887d47cee0800000000000000
-      internalID: -1240937992356938517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_20
-      rect:
-        serializedVersion: 2
-        x: 6419
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: df9d15d619e2bf260800000000000000
-      internalID: 7132345637010528765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_21
-      rect:
-        serializedVersion: 2
-        x: 7059
-        y: 0
-        width: 542
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13827dad75f63b9b0800000000000000
-      internalID: -5065582732737304527
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_22
-      rect:
-        serializedVersion: 2
-        x: 2499
-        y: 179
-        width: 22
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc5d39b3082e1fb60800000000000000
-      internalID: 7778247071828792779
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_23
-      rect:
-        serializedVersion: 2
-        x: 3149
-        y: 189
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5a7f7517d4b329230800000000000000
-      internalID: 3644040252296263589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_24
-      rect:
-        serializedVersion: 2
-        x: 6339
-        y: 179
-        width: 22
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 860d221207108efa0800000000000000
-      internalID: -5771361341371395992
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Machine-Sheet_25
-      rect:
-        serializedVersion: 2
-        x: 6989
-        y: 189
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c0f41578c100b8770800000000000000
-      internalID: 8613978834805542668
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 979f6b29b1176eb4981779e4bed5094d
     internalID: 0
     vertices: []
     indices: 
@@ -735,21 +441,7 @@ TextureImporter:
       Machine-Sheet_1: 4354863353767576244
       Machine-Sheet_10: -4336844734197677866
       Machine-Sheet_11: -8053150403464780867
-      Machine-Sheet_12: 1586796727418298419
-      Machine-Sheet_13: -5918231567394981320
-      Machine-Sheet_14: 6319557097881068546
-      Machine-Sheet_15: -2168542777952885015
-      Machine-Sheet_16: -3018463689720662371
-      Machine-Sheet_17: -732874755746851504
-      Machine-Sheet_18: 7105513710902756027
-      Machine-Sheet_19: -1240937992356938517
       Machine-Sheet_2: 5260582726124534870
-      Machine-Sheet_20: 7132345637010528765
-      Machine-Sheet_21: -5065582732737304527
-      Machine-Sheet_22: 7778247071828792779
-      Machine-Sheet_23: 3644040252296263589
-      Machine-Sheet_24: -5771361341371395992
-      Machine-Sheet_25: 8613978834805542668
       Machine-Sheet_3: -8473491051225248723
       Machine-Sheet_4: 1781676423765869859
       Machine-Sheet_5: -9118498511111904456

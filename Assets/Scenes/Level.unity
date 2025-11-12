@@ -151330,17 +151330,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7815149951914894809, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
   m_PrefabInstance: {fileID: 727689252}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &574450922 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2425167017281463539, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
-  m_PrefabInstance: {fileID: 370121168}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d168e817f83a2d34c9e9ed670fe7f4fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &576982707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7815149951914894809, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
@@ -153911,8 +153900,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 2788a28e363136744afb0e4e5b323f72, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b021e17cbc112e6469a2e1d966c7bfe8, type: 3}
+  m_Resource: {fileID: 8300000, guid: b021e17cbc112e6469a2e1d966c7bfe8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -154508,7 +154497,7 @@ PrefabInstance:
     - target: {fileID: 2425167017281463539, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
       propertyPath: targetPortal
       value: 
-      objectReference: {fileID: 574450922}
+      objectReference: {fileID: 0}
     - target: {fileID: 4717843164786358395, guid: a51cedbae220d0842abc58cc467dd093, type: 3}
       propertyPath: m_Name
       value: Portal (103)
